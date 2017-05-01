@@ -7,7 +7,7 @@ package mystack;
 
 /**
  *
- * @author guest-BJ2kKf
+ * @author Felipe Pontes <felipemfpontes@gmail.com>
  */
 public class Stack implements IStack{
     private int size;

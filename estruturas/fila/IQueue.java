@@ -7,7 +7,7 @@ package myqueue;
 
 /**
  *
- * @author guest-krsp21
+ * @author Felipe Pontes <felipemfpontes@gmail.com>
  */
 public interface IQueue {
     Object dequeue() throws EEmptyQueue;

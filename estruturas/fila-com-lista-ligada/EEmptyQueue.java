@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mystack;
+package myqueue;
 
 /**
  *
  * @author Felipe Pontes <felipemfpontes@gmail.com>
  */
-public interface IStack {
-    Object pop() throws Exception;
-    void push(Object o);
-    Object top() throws Exception;
-    int size();
-    boolean isEmpty();
+public class EEmptyQueue extends Exception {
+
+    public EEmptyQueue() {
+        super("Queue is empty.");
+    }
+
 }
