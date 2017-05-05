@@ -34,8 +34,9 @@ public class Queue implements IQueue {
         elements = new Object[elementsCopy.length * 2];
         
         int ii = start;
+        int ff = 0;
         
-        for (int ff=0; ff < size(); ff++) {
+        for (; ff < size(); ff++) {
             elements[ff] = elementsCopy[ii];
             ii = (++ii) % elementsCopy.length;
         }
