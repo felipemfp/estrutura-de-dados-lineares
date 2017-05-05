@@ -19,8 +19,12 @@ public class Queue implements IQueue {
             throw new EEmptyQueue();
         }
         
-        Object o = this.first.getValue();
-        this.first = this.first.getNext();
+        QueueNode nodeFirst = this.first();
+        
+        Object o = nodeFirst.getValue();
+        this.first = nodeFirst.getNext();
+        
+        nodeFirst.setNext(null);
         return o;
     }
 
