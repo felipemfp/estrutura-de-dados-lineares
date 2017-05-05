@@ -39,6 +39,9 @@ public class Queue implements IQueue {
             elements[ff] = elementsCopy[ii];
             ii = (++ii) % elementsCopy.length;
         }
+        
+        start = 0;
+        end = ff;
     }
     
     @Override
