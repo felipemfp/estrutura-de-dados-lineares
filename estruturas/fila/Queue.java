@@ -14,6 +14,7 @@ public class Queue implements IQueue {
     private int start;
     private int end;
     private Object[] elements;
+    private int length;
     
     public Queue() {
         this(20);
@@ -22,6 +23,7 @@ public class Queue implements IQueue {
     public Queue(int initialLength) {
         start = 0;
         end = 0;
+        length = 0;
         elements = new Object[initialLength];
     }
     
@@ -53,6 +55,7 @@ public class Queue implements IQueue {
         Object o = elements[start];
         elements[start] = null;
         start = (++start) % elements.length;
+        length--;
         return o;
     }
 
@@ -61,6 +64,7 @@ public class Queue implements IQueue {
         handleFull();
         elements[end] = o;
         end = (++end) % elements.length;
+        length++;
     }
 
     @Override
@@ -73,8 +77,7 @@ public class Queue implements IQueue {
 
     @Override
     public int size() {
-        int length = elements.length;
-        return (length - start + end) % length;
+        return this.length;
     }
 
     @Override

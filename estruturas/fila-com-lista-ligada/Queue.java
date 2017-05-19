@@ -12,6 +12,11 @@ package myqueue;
 public class Queue implements IQueue {
     private QueueNode first;
     private QueueNode last;
+    private int length;
+
+    public Queue() {
+        length = 0;
+    }
     
     @Override
     public Object dequeue() throws EEmptyQueue {
@@ -25,6 +30,7 @@ public class Queue implements IQueue {
         this.first = nodeFirst.getNext();
         
         nodeFirst.setNext(null);
+        length--;
         return o;
     }
 
@@ -41,6 +47,7 @@ public class Queue implements IQueue {
             this.last.setNext(enqueued);
             this.last = enqueued; 
         }
+        length++;
     }
 
     @Override
@@ -54,13 +61,7 @@ public class Queue implements IQueue {
 
     @Override
     public int getSize() {
-        int s = 0;
-        QueueNode o = this.first;
-        while (o != null) {
-            s++;
-            o = o.getNext();
-        }
-        return s;
+        return this.length;
     }
 
     @Override
