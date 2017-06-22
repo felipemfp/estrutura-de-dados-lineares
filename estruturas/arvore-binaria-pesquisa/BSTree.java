@@ -207,8 +207,8 @@ public class BSTree implements IBSTree {
                         m.getParent().setRightChild(null);
                     }
                 } else {
-                    this.rightChild(m).setParent(n);
-                    n.setRightChild(this.rightChild(m));
+                    this.rightChild(m).setParent(m.getParent());
+                    m.getParent().setLeftChild(this.rightChild(m));
                 }
                 
                 m.clear();
