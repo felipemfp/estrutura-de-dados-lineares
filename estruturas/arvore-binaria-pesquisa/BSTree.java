@@ -185,11 +185,16 @@ public class BSTree implements IBSTree {
     @Override
     public Object remove(Object k) throws InvalidKeyException {
         Node n = this.find(k);
-        Object o = n.getElement();
         
         if ((int)this.key(n) != (int)k) {
             throw new InvalidKeyException();
         }
+        
+        return this.remove(n);
+    }
+    
+    private Object remove(Node n) {
+        Object o = n.getElement();
         
         if (this.isInternal(n)) {
             Node m;
@@ -197,32 +202,20 @@ public class BSTree implements IBSTree {
             if (this.hasRightChild(n)) {
                 m = (Node)traverse(this.rightChild(n)).next();
                 
-                n.setElement(m.getElement());
                 n.setKey(m.getKey());
+                n.setElement(m.getElement());
                 
-                if (this.isExternal(m)) {
-                    if (this.leftChild(m.getParent()) == m) { // m é filho esquerdo
-                        m.getParent().setLeftChild(null);
-                    } else { // m é filho direito
-                        m.getParent().setRightChild(null);
-                    }
-                } else {
-                    this.rightChild(m).setParent(m.getParent());
-                    m.getParent().setLeftChild(this.rightChild(m));
-                }
-                
-                m.clear();
+                this.remove(m);
             } else {
                 m = this.leftChild(n);
-                
                 m.setParent(this.parent(n));
                 if (this.leftChild(n.getParent()) == n) {
                     n.getParent().setLeftChild(m);
                 } else {
                     n.getParent().setRightChild(m);
                 }               
-                
                 n.clear();
+                this.size--;
             }
         } else {
             if (this.leftChild(n.getParent()) == n) {
@@ -231,9 +224,8 @@ public class BSTree implements IBSTree {
                 n.getParent().setRightChild(null);
             }
             n.clear();
+            this.size--;
         }
-        
-        this.size--;
         
         return o;
     }

@@ -23,7 +23,7 @@ public class BSTPrintable extends BSTree {
     
     @Override
     public String toString() {
-        int height = this.height();
+        int height = this.height() + 1;
         int max = (int) Math.pow(2, height);        
         
         Node n = this.root();
@@ -39,7 +39,7 @@ public class BSTPrintable extends BSTree {
         while (l <= height) {
             for (Iterator<Node> it = levels.get(l-1).iterator(); it.hasNext();) {
                 n = it.next(); 
-                if (n != null) {
+                if (n != null && n.getKey().getClass() != NotNode.class) {
                     if (this.hasLeftChild(n)) {
                         curr.add(this.leftChild(n));    
                     } else {
@@ -51,8 +51,8 @@ public class BSTPrintable extends BSTree {
                         curr.add(null);
                     }
                 } else {
-                    curr.add(null);
-                    curr.add(null);
+                    curr.add(new Node(new NotNode(), new NotNode()));
+                    curr.add(new Node(new NotNode(), new NotNode()));
                 }
             }
             levels.put(l, curr);            
@@ -81,6 +81,8 @@ public class BSTPrintable extends BSTree {
             Node n = (Node) v.get(i);
             if (n == null) {
                 level += "[]";    
+            } else if (n.getKey().getClass() == NotNode.class) {
+                level += "--";
             } else {
                 level += String.format("%02d", (int)this.key(n));
             }            
@@ -90,4 +92,5 @@ public class BSTPrintable extends BSTree {
         return level + "\n";
     }
     
+    private class NotNode { }    
 }

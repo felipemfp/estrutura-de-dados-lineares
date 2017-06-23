@@ -17,60 +17,48 @@ public class MyBinarySearchTree {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InvalidKeyException {
         // TODO code application logic here
         
         BSTPrintable bst = new BSTPrintable(7, "Felipe Pontes");
         
-        bst.insert( 5, "Karen Cristina");
-        bst.insert( 3, "Francisco Bento");
-        bst.insert( 4, "Beatriz Nascimento");
-        bst.insert(14, "Alguém");
-        bst.insert(15, "Mareana Graciano");
-        bst.insert(22, "Cecília Rayllana");
-        bst.insert(10, "Lana Raquel");
-        bst.insert( 6, "Rebeca Gagliuffi");
-        bst.insert(23, "Paulo Trindade");
-        bst.insert(8, "Cesar Vagner");
-        bst.insert(12, "Deyvison Costa");
+        addAndPrint(bst, 5, "Karen Cristina");
+        addAndPrint(bst, 3, "Francisco Bento");
+        addAndPrint(bst, 4, "Beatriz Nascimento");
+        addAndPrint(bst, 14, "Alguém");
+        addAndPrint(bst, 15, "Mareana Graciano");
+        addAndPrint(bst, 22, "Cecília Rayllana");
+        addAndPrint(bst, 10, "Lana Raquel");
+        addAndPrint(bst, 6, "Rebeca Gagliuffi");
+        addAndPrint(bst, 23, "Paulo Trindade");
+        addAndPrint(bst, 8, "Cesar Vagner");
+        addAndPrint(bst, 12, "Deyvison Costa");
         
+        removeAndPrint(bst, 14);        
+        removeAndPrint(bst, 6);        
+        removeAndPrint(bst, 7);
+        
+        addAndPrint(bst, 6, "Karla Viviane");
+        
+        removeAndPrint(bst, 5);
+        removeAndPrint(bst, 8);
+        removeAndPrint(bst, 6);
+        removeAndPrint(bst, 15);
+        removeAndPrint(bst, 22);
+        addAndPrint(bst, 6, "Rebeca Gagliuffi");
+        addAndPrint(bst, 22, "Cecília Rayllana");
+    }
+    
+    private static void removeAndPrint(BSTPrintable bst, Object k) throws InvalidKeyException {
+        String alguem = (String)bst.remove(k);
+        System.out.println(alguem + " [" +k+ "] foi removido.");
         System.out.println(bst);
-        
-        try {
-            String alguem = (String)bst.remove(14);
-            System.out.println(alguem + " [" +14+ "] foi removido.");
-            System.out.println(bst);
-        } catch (InvalidKeyException ex) {
-            Logger.getLogger(MyBinarySearchTree.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        try {
-            String alguem = (String)bst.remove(6);
-            System.out.println(alguem + " [" +6+ "] foi removido.");
-            System.out.println(bst);
-        } catch (InvalidKeyException ex) {
-            Logger.getLogger(MyBinarySearchTree.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        try {
-            String alguem = (String)bst.remove(7);
-            System.out.println(alguem + " [" +7+ "] foi removido.");
-            System.out.println(bst);
-        } catch (InvalidKeyException ex) {
-            Logger.getLogger(MyBinarySearchTree.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
-        bst.insert(6, "Karla Viviane");
+    }
+    
+    private static void addAndPrint(BSTPrintable bst, Object k, Object o) {
+        bst.insert(k, o);
+        System.out.println(o + " [" +k+ "] foi adicionado.");
         System.out.println(bst);
-        
-        try {
-            String alguem = (String)bst.remove(5);
-            System.out.println(alguem + " [" +5+ "] foi removido.");
-            System.out.println(bst);
-        } catch (InvalidKeyException ex) {
-            Logger.getLogger(MyBinarySearchTree.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
     
 }
