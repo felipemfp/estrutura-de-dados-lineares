@@ -21,6 +21,7 @@ public class MyBinarySearchTree {
         // TODO code application logic here
         
         BSTPrintable bst = new BSTPrintable(7, "Felipe Pontes");
+        System.out.println(bst);
         
         addAndPrint(bst, 5, "Karen Cristina");
         addAndPrint(bst, 3, "Francisco Bento");

@@ -16,13 +16,13 @@ import java.util.function.Function;
  * @author felipemfp
  */
 public class BSTree implements IBSTree {
-    
+
     private int size;
     private Node root;
 
     public BSTree(Object k, Object o) {
         size = 1;
-        root = new Node(k, o);       
+        root = new Node(k, o);
     }
 
     @Override
@@ -39,8 +39,8 @@ public class BSTree implements IBSTree {
     public int height() {
         return this.height(this.root);
     }
-    
-    private int height(Node n) {        
+
+    private int height(Node n) {
         if (this.isExternal(n)) {
             return 0;
         }
@@ -67,7 +67,7 @@ public class BSTree implements IBSTree {
     public Iterator nodes() {
         return this.nodes(this.root).iterator();
     }
-    
+
     private Vector nodes(Node n) {
         Vector v = new Vector();
         v.add(n);
@@ -79,7 +79,7 @@ public class BSTree implements IBSTree {
         }
         return v;
     }
-    
+
     protected Object key(Node n) {
         return n.getKey();
     }
@@ -111,10 +111,11 @@ public class BSTree implements IBSTree {
 
     @Override
     public int depth(Node n) {
-        if (n == this.root)
+        if (n == this.root) {
             return 0;
+        }
         return 1 + this.depth(n.getParent());
-    }    
+    }
 
     @Override
     public Node leftChild(Node n) {
@@ -129,8 +130,8 @@ public class BSTree implements IBSTree {
     @Override
     public Node sibling(Node n) {
         if (this.rightChild(n.getParent()) == n) {
-            return this.leftChild(n.getParent());    
-        }        
+            return this.leftChild(n.getParent());
+        }
         return this.rightChild(n.getParent());
     }
 
@@ -153,15 +154,15 @@ public class BSTree implements IBSTree {
     public Node find(Object k) {
         return find(k, this.root());
     }
-    
+
     private Node find(Object k, Node n) {
         if (this.isExternal(n)) {
             return n;
         }
-        if ((int)this.key(n) > (int)k && this.hasLeftChild(n)) {
+        if ((int) this.key(n) > (int) k && this.hasLeftChild(n)) {
             return find(k, this.leftChild(n));
-        } else  if ((int)this.key(n) < (int)k && this.hasRightChild(n)) {
-            return find(k, this.rightChild(n));            
+        } else if ((int) this.key(n) < (int) k && this.hasRightChild(n)) {
+            return find(k, this.rightChild(n));
         }
         return n;
     }
@@ -169,42 +170,42 @@ public class BSTree implements IBSTree {
     @Override
     public void insert(Object k, Object o) {
         Node p = this.find(k);
-        
-        if ((int)this.key(p) != (int)k) {
+
+        if ((int) this.key(p) != (int) k) {
             Node n = new Node(k, o, p);
-            if ((int)this.key(p) > (int)k) {
+            if ((int) this.key(p) > (int) k) {
                 p.setLeftChild(n);
             } else {
                 p.setRightChild(n);
-            }            
+            }
             this.size++;
-        }        
-        
+        }
+
     }
 
     @Override
     public Object remove(Object k) throws InvalidKeyException {
         Node n = this.find(k);
-        
-        if ((int)this.key(n) != (int)k) {
+
+        if ((int) this.key(n) != (int) k) {
             throw new InvalidKeyException();
         }
-        
+
         return this.remove(n);
     }
-    
+
     private Object remove(Node n) {
         Object o = n.getElement();
-        
+
         if (this.isInternal(n)) {
             Node m;
-            
+
             if (this.hasRightChild(n)) {
-                m = (Node)traverse(this.rightChild(n)).next();
-                
+                m = (Node) traverse(this.rightChild(n)).next();
+
                 n.setKey(m.getKey());
                 n.setElement(m.getElement());
-                
+
                 this.remove(m);
             } else {
                 m = this.leftChild(n);
@@ -213,7 +214,7 @@ public class BSTree implements IBSTree {
                     n.getParent().setLeftChild(m);
                 } else {
                     n.getParent().setRightChild(m);
-                }               
+                }
                 n.clear();
                 this.size--;
             }
@@ -226,19 +227,23 @@ public class BSTree implements IBSTree {
             n.clear();
             this.size--;
         }
-        
+
         return o;
     }
-    
+
+    public Iterator traverse() {
+        return this.traverse(this.root);
+    }
+
     public Iterator traverse(Node n) {
         Vector v = new Vector();
         this.traverse(n, v);
         return v.iterator();
     }
-    
+
     private void traverse(Node n, Vector v) {
         if (this.hasLeftChild(n)) {
-            traverse(this.leftChild(n), v);   
+            traverse(this.leftChild(n), v);
         }
         v.add(n);
         if (this.hasRightChild(n)) {
