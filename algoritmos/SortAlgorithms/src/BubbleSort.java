@@ -18,20 +18,22 @@ public class BubbleSort implements SortAlgorithm {
         a[j] = aux;
     }
 
+    private Object[] _sort(Object[] collection, Comparator comparator) {
+        for (int i = 0; i < collection.length - 1; i++) {
+            for (int j = 0; j < collection.length - 1 - i; j++) {
+                if (comparator.compare(collection[j], collection[j + 1]) > 0) {
+                    swap(collection, j, j + 1);
+                }
+            }
+        }
+        return collection;
+    }
+
     @Override
     public Object[] sort(Object[] collection, Comparator comparator) {
         Object copy[] = new Object[collection.length];
         System.arraycopy(collection, 0, copy, 0, collection.length);
-
-        for (int i = 0; i < copy.length - 1; i++) {
-            for (int j = 0; j < copy.length - 1 - i; j++) {
-                if (comparator.compare(copy[j], copy[j + 1]) > 0) {
-                    swap(copy, j, j + 1);
-                }
-            }
-        }
-
-        return copy;
+        return _sort(copy, comparator);
     }
 
 }
