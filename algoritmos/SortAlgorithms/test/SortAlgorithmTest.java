@@ -30,6 +30,24 @@ public class SortAlgorithmTest {
 
         assertArrayEquals(expResult, result);
     }
+    
+    @Test
+    public void testSelectSort() {
+        algorithm = new SelectSort();
+        
+        Object[] result = algorithm.sort(input, new IntegerComparator());
+        
+        assertArrayEquals(expResult, result);
+    }
+    
+    @Test
+    public void testInsertSort() {
+        algorithm = new InsertSort();
+        
+        Object[] result = algorithm.sort(input, new IntegerComparator());
+        
+        assertArrayEquals(expResult, result);
+    }
 
     @Test
     public void testMergeSort() {
