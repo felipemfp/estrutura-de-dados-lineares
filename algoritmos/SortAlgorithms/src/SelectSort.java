@@ -6,13 +6,12 @@ import java.util.Comparator;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author chicobentojr
  */
 public class SelectSort implements SortAlgorithm {
-    
+
     private Object[] _sort(Object[] collection, Comparator comparator) {
         for (int i = 0; i < collection.length - 2; i++) {
             for (int j = i + 1; j < collection.length - 1; j++) {
